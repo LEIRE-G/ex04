@@ -6,7 +6,7 @@
     <title>@yield('title')</title> </head>
 <body>
 
-    @include('menu')
+    @include('layout.nave')
 
     <div class="container">
         @yield('content')
@@ -14,4 +14,3 @@
 
 </body>
 </html>
-

@@ -10,5 +10,5 @@
     @method('DELETE')
 
     <button type="submit">Sí, eliminar</button>
-    <a href="{{ route('prendas.showAllPrendas') }}">Cancelar</a>
+    <a href="{{ route('prendas.index') }}">Cancelar</a>
  </form>

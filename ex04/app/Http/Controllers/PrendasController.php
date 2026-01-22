@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Prendas;
+use App\Models\Prenda;
 use Illuminate\Http\Request;
 
 class PrendasController extends Controller
@@ -12,7 +12,7 @@ class PrendasController extends Controller
      */
     public function index()
     {
-       $prendas = Prendas::all();
+       $prendas = Prenda::all();
         return view('prendas.showAllPrendas', compact('prendas'));  
     }
 
@@ -21,8 +21,7 @@ class PrendasController extends Controller
      */
     public function create()
     {
-        $prendas = Prendas::all();
-        return view('prendas.showAllPrendas',compact('prendas'));
+        return view('prendas.create');
     }
 
     /**
@@ -42,37 +41,31 @@ class PrendasController extends Controller
             'precio.numeric' => 'El precio debe ser un número'
         ]);
 
-        $prendas = Prendas::create($request->only(['nombre', 'descripcion', 'precio']));
+        $prendas = Prenda::create($request->only(['nombre', 'descripcion', 'precio']));
 
-        return redirect()->route('prendas.showAllPrendas');
+        return redirect()->route('prendas.index');
     }
     
 
-    public function showAllPrendas($id) 
+    public function show($id)
     {
-        $prendas = Prendas::all();
-        return view('prendas.showAllPrendas', compact('prendas'));
-    }
-
-   public function showOnePrendas($id)
-    {
-        $prenda = Prendas::findOrFail($id);
+        $prenda = Prenda::findOrFail($id);
         return view('prendas.showOnePrendas', compact('prenda'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Prendas $prendas)
+    public function edit($id)
     {
-         $prenda = Prendas::findOrFail($id);
+         $prenda = Prenda::findOrFail($id);
         return view('prendas.edit', compact('prenda'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Prendas $prendas)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'nombre' => 'required',
@@ -83,27 +76,28 @@ class PrendasController extends Controller
             'nombre.required' => 'El nombre es obligatorio'
         ]);
 
-        $prenda = Prendas::findOrFail($id);
+        $prenda = Prenda::findOrFail($id);
 
-        $prenda->update($request->only(['nombre']));
+        $prenda->update($request->only(['nombre', 'descripcion', 'precio']));
 
-        return redirect()->route('prendas.showOnePrendas', $id);
+        return redirect()->route('prendas.show', $id);
     }
 
-    public function confirmDelete(Prendas $prendas)
+    public function confirmDelete($id)
     {
-        return view('prendas.confirmDelete', compact('prendas'));
+        $prenda = Prenda::findOrFail($id);
+        return view('prendas.confirmDelete', compact('prenda'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Prendas $prendas)
+    public function destroy(Prenda $prenda)
     {
-        $prendas->delete();
+        $prenda->delete();
 
         return redirect()
-            ->route('prendas.showAllPrendas')
+            ->route('prendas.index')
             ->with('success', 'Prenda eliminada correctamente');
     }
 
