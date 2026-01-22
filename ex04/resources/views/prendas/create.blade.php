@@ -19,7 +19,7 @@
 
     <input type="text" name="nombre" placeholder="Nombre " value="{{ old('nombre') }}">
     <input type="text" name="descripcion" placeholder="Descripción" value="{{ old('descripcion') }}">
-    <input type="number" name="precio" placeholder="Precio" value="{{ old('precio') }}">
+    <input type="number" name="precio" step="0.01" placeholder="Precio" value="{{ old('precio') }}">
     
     <button type="submit">Guardar</button>
 </form>

@@ -18,6 +18,6 @@
 
     <input type="text" name="nombre" value="{{ $prenda->nombre }}">
     <input type="text" name="descripcion" value="{{ $prenda->descripcion }}">
-    <input type="number" name="precio" value="{{ $prenda->precio }}">
+    <input type="number" step="0.01" name="precio" value="{{ $prenda->precio }}">
     <button type="submit">Actualizar</button>
 </form>

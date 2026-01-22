@@ -9,3 +9,4 @@ Route::get('/', function () {
 
 Route::get('prendas/{id}/confirmDelete', [PrendasController::class, 'confirmDelete'])->name('prendas.confirmDelete');
 Route::resource('prendas', PrendasController::class);
+
