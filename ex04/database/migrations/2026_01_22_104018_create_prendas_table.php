@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('prendas', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre');
+            $table->text('descripcion');
+            $table->decimal('precio', 5, 2);
             $table->timestamps();
         });
     }
